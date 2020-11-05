@@ -22,7 +22,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .title {
-  background-color: #f00;
+  background-color: #f0f;
   font-size: 3rem;
 }
 </style>

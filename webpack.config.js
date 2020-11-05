@@ -4,15 +4,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
   target: 'web',
   entry: './src/main.js',
-  output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+  // output: {
+  //   filename: 'index.js',
+  //   path: path.resolve(__dirname, 'dist'),
+  // },
   // cache: {
   //   type: 'filesystem',
   //   store: 'pack',
@@ -46,35 +47,43 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'vue-style-loader',
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
           },
           {
             loader: 'css-loader',
           },
-          // {
-          //   loader: 'postcss-loader',
-          //   options: {
-          //     // TODO: 根据构建模式取值
-          //     sourceMap: true
-          //   }
-          // }
+          {
+            loader: 'postcss-loader',
+            options: {
+              // TODO: 根据构建模式取值
+              sourceMap: true,
+            },
+          },
         ],
       },
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
+          },
           'css-loader',
           {
             loader: 'sass-loader',
           },
-          // {
-          //   loader: 'postcss-loader',
-          //   options: {
-          //     // TODO: 根据构建模式取值
-          //     sourceMap: true
-          //   }
-          // }
+          {
+            loader: 'postcss-loader',
+            options: {
+              // TODO: 根据构建模式取值
+              sourceMap: true,
+            },
+          },
         ],
       },
       {
@@ -99,10 +108,11 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
+    stats: 'minimal',
+    overlay: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       title: 'vue3-test',
       minify: {
@@ -115,18 +125,11 @@ module.exports = {
       inject: true,
       prod: false,
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+    new ProgressBarPlugin(),
     new VueLoaderPlugin(),
-    new FriendlyErrorsWebpackPlugin(
-      {
-        additionalTransformers: [
-          function () { /* omitted long function */
-          },
-        ],
-        additionalFormatters: [
-          function () { /* omitted long function */
-          },
-        ],
-      },
-    ),
+    new FriendlyErrorsWebpackPlugin(),
   ],
 }
