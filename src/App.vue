@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <h1
-      class="title"
-    >
-      {{ msg }}
-    </h1>
+    <router-view />
   </div>
 </template>
 
@@ -21,8 +17,4 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.title {
-  background-color: #f0f;
-  font-size: 3rem;
-}
 </style>

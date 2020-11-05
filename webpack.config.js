@@ -38,7 +38,23 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: ['thread-loader', 'babel-loader'],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.ts$/,
+        use: [
+          'thread-loader',
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              appendTsSuffixTo: ['\\.vue$'],
+              happyPackMode: true,
+            },
+          },
+        ],
         exclude: /node_modules/,
       },
       {
