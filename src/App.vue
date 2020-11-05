@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <h1 class="title">{{ msg }}</h1>
+    <h1
+      class="title"
+    >
+      {{ msg }}
+    </h1>
   </div>
 </template>
 
@@ -10,9 +14,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   data () {
     return {
-      msg: 'hello world'
+      msg: 'hello world',
     }
-  }
+  },
 })
 </script>
 

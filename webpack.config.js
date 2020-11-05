@@ -1,10 +1,22 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
   target: 'web',
   entry: './src/main.js',
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  // cache: {
+  //   type: 'filesystem',
+  //   store: 'pack',
+  // },
   resolve: {
     extensions: [
       '.tsx',
@@ -12,22 +24,41 @@ module.exports = {
       '.js',
       '.jsx',
       '.vue',
-      '.json'
+      '.json',
     ],
     alias: {
-      vue$: 'vue/dist/vue.runtime.esm-bundler.js'
-    }
+      '@': path.join(__dirname, 'src'),
+      vue$: 'vue/dist/vue.esm-bundler.js',
+    },
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'vue-style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     // TODO: 根据构建模式取值
+          //     sourceMap: true
+          //   }
+          // }
+        ],
       },
       {
         test: /\.scss$/,
@@ -35,13 +66,16 @@ module.exports = {
           'vue-style-loader',
           'css-loader',
           {
-            loader: 'postcss-loader',
-            options: {
-              // TODO: 根据构建模式取值
-              sourceMap: true
-            }
-          }
-        ]
+            loader: 'sass-loader',
+          },
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     // TODO: 根据构建模式取值
+          //     sourceMap: true
+          //   }
+          // }
+        ],
       },
       {
         test: /\.(gif|png|jpe?g|svg|ico)$/i,
@@ -50,27 +84,49 @@ module.exports = {
             loader: 'url-loader',
             options: {
               name: 'assets/[name].[hash:5].[ext]',
-              limit: 200 // 小于8k的图片自动转成base64格式，并且不会存在实体图片,
+              limit: 200, // 小于8k的图片自动转成base64格式，并且不会存在实体图片,
               // publicPath:'./'
-            }
-          }
-        ]
-      }
-      // {test: /\.css$/, use:['style-loader','css-loader']},//配置处理.css文件的第三方处理规则
-      // {test: /\.scss$/, use: ["style-loader",'css-loader','sass-loader']},
-      // {test: /\.(jpg|png|gif|bmp|jpeg)$/, use: "url-loader?limit=8000"},
-      // {test: /\.(tff|eot|svg|woff|woff2)$/, use: "url-loader"},
-    ]
+            },
+          },
+        ],
+      },
+    ],
   },
   devServer: {
+    open: false,
+    hot: true,
+    inline: true,
     contentBase: path.join(__dirname, 'dist'),
-    compress: false,
-    port: 9000
+    compress: true,
+    port: 9000,
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      title: 'vue3-test',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeScriptTypeAttributes: true,
+      },
+      template: './public/index.html',
+      inject: true,
+      prod: false,
     }),
-    new VueLoaderPlugin()
-  ]
+    new VueLoaderPlugin(),
+    new FriendlyErrorsWebpackPlugin(
+      {
+        additionalTransformers: [
+          function () { /* omitted long function */
+          },
+        ],
+        additionalFormatters: [
+          function () { /* omitted long function */
+          },
+        ],
+      },
+    ),
+  ],
 }
