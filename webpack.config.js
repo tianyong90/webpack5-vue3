@@ -6,6 +6,8 @@ const { VueLoaderPlugin } = require('vue-loader')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
   mode: 'development',
   target: 'web',
@@ -49,7 +51,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: true,
+              hmr: !isProduction,
             },
           },
           {
@@ -58,8 +60,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              // TODO: 根据构建模式取值
-              sourceMap: true,
+              sourceMap: !isProduction,
             },
           },
         ],
@@ -70,7 +71,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: true,
+              hmr: !isProduction,
             },
           },
           'css-loader',
@@ -80,8 +81,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              // TODO: 根据构建模式取值
-              sourceMap: true,
+              sourceMap: !isProduction,
             },
           },
         ],
@@ -114,7 +114,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'vue3-test',
+      title: 'webpack5-vue3',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -123,7 +123,7 @@ module.exports = {
       },
       template: './public/index.html',
       inject: true,
-      prod: false,
+      prod: isProduction,
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
