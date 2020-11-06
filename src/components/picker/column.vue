@@ -18,6 +18,7 @@
           v-for="option in visibleItems"
           :key="option"
           class="picker-option"
+          :style="itemStyle"
         >
           {{ option }}
         </div>
@@ -38,25 +39,16 @@ export default defineComponent({
   },
 
   setup () {
-    // const rootHeight = ref(300)
-    // const rowHeight = ref(40)
-    // const scrollTop = ref(0)
-    // const nodePadding = ref(20)
-    //
-    // return {
-    //   rootHeight,
-    //   rowHeight,
-    //   scrollTop,
-    //   nodePadding,
-    // }
-  },
+    const rootHeight = ref(300)
+    const rowHeight = ref(40)
+    const scrollTop = ref(0)
+    const nodePadding = ref(20)
 
-  data () {
     return {
-      rootHeight: 300,
-      rowHeight: 40,
-      scrollTop: 0,
-      nodePadding: 20,
+      rootHeight,
+      rowHeight,
+      scrollTop,
+      nodePadding,
     }
   },
 
@@ -90,6 +82,12 @@ export default defineComponent({
 
     offsetY () {
       return this.startIndex * this.rowHeight
+    },
+
+    itemStyle () {
+      return {
+        height: this.rowHeight + 'px',
+      }
     },
 
     spacerStyle () {
@@ -186,7 +184,6 @@ export default defineComponent({
   .picker-option {
     display: inline-flex;
     width: 100%;
-    height: 40px;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
