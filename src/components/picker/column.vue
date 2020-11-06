@@ -19,6 +19,7 @@
           :key="option"
           class="picker-option"
           :style="itemStyle"
+          @click="onClickItem(option)"
         >
           {{ option }}
         </div>
@@ -39,7 +40,7 @@ export default defineComponent({
   },
 
   setup () {
-    const rootHeight = ref(300)
+    const rootHeight = ref(0)
     const rowHeight = ref(40)
     const scrollTop = ref(0)
     const nodePadding = ref(20)
@@ -113,6 +114,9 @@ export default defineComponent({
   },
 
   mounted () {
+    // 根据可视行数计算高度
+    this.rootHeight = this.$parent.visibleItemCount * this.rowHeight
+
     this.$nextTick(() => {
       this.$refs.root.addEventListener(
         'scroll',
@@ -170,6 +174,10 @@ export default defineComponent({
       }
       return largestHeight
     },
+
+    onClickItem (item) {
+      console.log(item)
+    },
   },
 })
 </script>
@@ -186,8 +194,8 @@ export default defineComponent({
     width: 100%;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 400;
   }
 }
 </style>

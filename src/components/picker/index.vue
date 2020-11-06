@@ -15,7 +15,18 @@ export default defineComponent({
     PickerColumn,
   },
 
-  setup () {
+  props: {
+    visibleItemCount: {
+      type: Number,
+      default: 7,
+    },
+    rowHeight: {
+      type: Number,
+      default: 40,
+    },
+  },
+
+  setup (props, context) {
     let options = ref([])
 
     options = new Array(10000)
@@ -26,11 +37,19 @@ export default defineComponent({
       options,
     }
   },
+
+  mounted () {
+    // 上下两部分阴影遮罩的高度根据可视元素个数和行高进行计算
+    const maskHeight = Math.floor(this.visibleItemCount / 2) * this.rowHeight
+    this.$el.style.setProperty('--mask-height', `${maskHeight}px`)
+  },
 })
 </script>
 
 <style scoped lang="scss">
 .picker {
+  --mask-height: 120px;
+
   display: flex;
   flex-direction: row;
   fleX: 1;
@@ -42,7 +61,7 @@ export default defineComponent({
     content: "";
     position: absolute;
     width: 100%;
-    height: 45%;
+    height: var(--mask-height, 120px);
     z-index: -1;
   }
 
