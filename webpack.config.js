@@ -6,6 +6,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -14,7 +15,7 @@ console.log(isProduction)
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   target: 'web',
-  entry: './src/main.js',
+  entry: './src/main.ts',
   output: {
     // filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
@@ -142,6 +143,20 @@ module.exports = {
       template: './public/index.html',
       inject: true,
       prod: isProduction,
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        extensions: {
+          vue: {
+            enabled: true,
+            compiler: '@vue/compiler-sfc',
+          },
+        },
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
     }),
     new MiniCssExtractPlugin({
       filename: !isProduction ? '[name].css' : '[name].[contenthash].css',

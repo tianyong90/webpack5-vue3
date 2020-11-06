@@ -1,24 +1,22 @@
 <template>
   <div>
-    <RainEffect />
+    asf
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import RainEffect from '@/components/rain-effect/index.vue'
 
 export default defineComponent({
-  components: {
-    RainEffect,
-  },
-
   setup () {
     const msg = ref('hello')
 
     return {
       msg,
     }
+  },
+
+  mounted () {
   },
 })
 </script>
