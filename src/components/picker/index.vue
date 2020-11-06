@@ -1,6 +1,8 @@
 <template>
   <div class="picker">
     <PickerColumn :items="options" />
+    <PickerColumn :items="options" />
+    <PickerColumn :items="options" />
   </div>
 </template>
 
@@ -16,19 +18,12 @@ export default defineComponent({
   setup () {
     let options = ref([])
 
-    options = new Array(100000)
+    options = new Array(10000)
       .fill(null)
-      .map((item, index) => 'Item ' + (index + 1)) as any
-
-    const rootHeight = 300
-    const rowHeight = 40
-    const scrollTop = 0
-    const nodePadding = 20
+      .map((item, index) => (index % 60).toString().padStart(2, '0')) as any
 
     return {
       options,
-      rootHeight,
-      rowHeight,
     }
   },
 })
@@ -37,5 +32,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .picker {
   display: flex;
+  flex-direction: row;
+  fleX: 1;
 }
 </style>

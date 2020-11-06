@@ -182,17 +182,16 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  width: 200px;
-  background: #00f;
+  flex: 1;
 
   .picker-option {
     display: inline-flex;
     width: 100%;
     height: 40px;
-    background-color: #f00;
-    color: #fff;
     justify-content: center;
     align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
   }
 }
 </style>
