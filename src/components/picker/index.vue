@@ -1,6 +1,6 @@
 <template>
   <div class="picker">
-    <PickerColumn :options="options" />
+    <PickerColumn :items="options" />
   </div>
 </template>
 
@@ -14,21 +14,22 @@ export default defineComponent({
   },
 
   setup () {
-    const options = ref([
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-    ])
+    let options = ref([])
+
+    options = new Array(100000)
+      .fill(null)
+      .map((item, index) => 'Item ' + (index + 1)) as any
+
+    const rootHeight = 300
+    const rowHeight = 40
+    const scrollTop = 0
+    const nodePadding = 20
 
     return {
       options,
+      rootHeight,
+      rowHeight,
     }
-  },
-
-  mounted () {
   },
 })
 </script>
