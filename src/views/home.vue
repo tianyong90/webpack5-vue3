@@ -1,8 +1,6 @@
 <template>
   <div>
-    {{ msg }}
-
-    <h1 class="text-xl">
+    <h1 class="text-xl bg-yellow-500">
       hello
     </h1>
   </div>
@@ -24,6 +22,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 h1 {
-  color: red;
+  font-size: 1rem;
 }
 </style>

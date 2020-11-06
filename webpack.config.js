@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
@@ -8,14 +9,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+console.log(isProduction)
+
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   target: 'web',
   entry: './src/main.js',
-  // output: {
-  //   filename: 'index.js',
-  //   path: path.resolve(__dirname, 'dist'),
-  // },
+  output: {
+    // filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
   // cache: {
   //   type: 'filesystem',
   //   store: 'pack',
@@ -38,12 +41,17 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: ['thread-loader', 'babel-loader'],
+        use: [
+          'cache-loader',
+          'thread-loader',
+          'babel-loader',
+        ],
         exclude: /node_modules/,
       },
       {
         test: /\.ts$/,
         use: [
+          'cache-loader',
           'thread-loader',
           'babel-loader',
           {
@@ -66,18 +74,14 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: !isProduction,
-            },
+            options: {},
           },
           {
             loader: 'css-loader',
+            options: { sourceMap: false, importLoaders: 2 },
           },
           {
             loader: 'postcss-loader',
-            options: {
-              sourceMap: !isProduction,
-            },
           },
         ],
       },
@@ -86,19 +90,17 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: !isProduction,
-            },
+            options: {},
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: { sourceMap: false, importLoaders: 2 },
+          },
           {
             loader: 'sass-loader',
           },
           {
             loader: 'postcss-loader',
-            options: {
-              sourceMap: !isProduction,
-            },
           },
         ],
       },
@@ -142,10 +144,13 @@ module.exports = {
       prod: isProduction,
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: !isProduction ? '[name].css' : '[name].[contenthash].css',
+      chunkFilename: !isProduction ? '[id].css' : '[id].[contenthash].css',
     }),
     new ProgressBarPlugin(),
     new VueLoaderPlugin(),
     new FriendlyErrorsWebpackPlugin(),
+    // TODO:
+    // new CleanWebpackPlugin(),
   ],
 }
