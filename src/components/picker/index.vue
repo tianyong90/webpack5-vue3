@@ -34,5 +34,27 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
   fleX: 1;
+  position: relative;
+  user-select: none;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 45%;
+    z-index: -1;
+  }
+
+  &::before {
+    border-bottom: 1px solid #cdcdcd;
+    background-image: linear-gradient(to top, rgba(216 216 216 / 0.5), rgba(255 255 255 / 0.2));
+  }
+
+  &::after {
+    bottom: 0;
+    border-top: 1px solid #cdcdcd;
+    background-image: linear-gradient(to bottom, rgba(216 216 216 / 0.5), rgba(255 255 255 / 0.2));
+  }
 }
 </style>

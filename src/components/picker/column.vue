@@ -159,7 +159,6 @@ export default defineComponent({
     },
 
     handleScroll (event) {
-      console.log('123')
       this.scrollTop = this.$refs.root.scrollTop
     },
 
