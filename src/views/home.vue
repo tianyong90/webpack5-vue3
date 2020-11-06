@@ -1,16 +1,16 @@
 <template>
   <div>
-    <RainEffect />
+    <Picker />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import RainEffect from '@/components/rain-effect/index.vue'
+import Picker from '@/components/picker/index.vue'
 
 export default defineComponent({
   components: {
-    RainEffect,
+    Picker,
   },
 
   setup () {
