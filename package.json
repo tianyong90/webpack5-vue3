@@ -12,6 +12,7 @@
   "dependencies": {
     "element-plus": "^1.0.1-alpha.14",
     "lodash": "^4.17.20",
+    "mescroll.js": "^1.4.2",
     "tailwindcss": "^1.9.6",
     "three": "^0.122.0",
     "vue": "^3.0.2",

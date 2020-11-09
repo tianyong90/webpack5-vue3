@@ -6,12 +6,15 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '@/views/home.vue'),
   },
+  {
+    path: '/scroll',
+    name: 'scroll',
+    component: () => import(/* webpackChunkName: "scroll" */ '@/views/scroll.vue'),
+  },
 ]
 
 const router = createRouter({
-  // TODO:
-  // history: createWebHistory(process.env.BASE_URL),
-  history: createWebHistory('/'),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 })
 

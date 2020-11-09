@@ -126,11 +126,22 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     port: 9000,
-    stats: 'minimal',
+    stats: {
+      colors: true,
+      entrypoints: true,
+      depth: true,
+      chunks: true,
+    },
     overlay: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        // NODE_ENV: '"production"',
+        BASE_URL: '"/"',
+      },
+    }),
     new HtmlWebpackPlugin({
       title: 'webpack5-vue3',
       minify: {

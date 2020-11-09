@@ -1,26 +1,16 @@
 <template>
   <div>
-    <Picker />
-
-    <div class="list">
-      <div
-        v-for="i in 20"
-        :key="i"
-        class="list-item flex py-2"
-      >
-        {{ i }}
-      </div>
-    </div>
+    栽植
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Picker from '@/components/picker/index.vue'
+import MescrollVue from 'mescroll.js/mescroll.vue'
 
 export default defineComponent({
   components: {
-    Picker,
+    MescrollVue,
   },
 
   setup () {
