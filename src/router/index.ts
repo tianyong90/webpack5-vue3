@@ -11,11 +11,15 @@ const routes: Array<RouteRecordRaw> = [
     name: 'test',
     component: () => import(/* webpackChunkName: "test" */ '@/views/test.vue'),
   },
+
+  {
+    path: '/:catchAll(.*)',
+    component: () => import(/* webpackChunkName: "test" */ '@/views/errors/404.vue'),
+  },
 ]
 
 const router = createRouter({
-  // history: createWebHistory(process.env.BASE_URL),
-  history: createWebHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 })
 
