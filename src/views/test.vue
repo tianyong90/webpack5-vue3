@@ -1,25 +1,36 @@
 <template>
   <div>
-    栽植
+    <Picker />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import MescrollVue from 'mescroll.js/mescroll.vue'
+import Picker from '@/components/picker/index.vue'
 
 export default defineComponent({
   components: {
-    MescrollVue,
+    Picker,
   },
 
-  setup () {
+  setup (props, context) {
     const msg = ref('hello')
+
+    // console.log(props)
+    // console.log(context)
+    // console.log(context.upCallback)
 
     return {
       msg,
     }
   },
+
+  data () {
+    return {
+    }
+  },
+
+  methods: {},
 })
 </script>
 

@@ -1,16 +1,13 @@
 <template>
   <div>
-    <Picker />
+    <router-link
+      to="/test"
+      class="my-5 text-lg"
+    >
+      test
+    </router-link>
 
-    <div class="list">
-      <div
-        v-for="i in 20"
-        :key="i"
-        class="list-item flex py-2"
-      >
-        {{ i }}
-      </div>
-    </div>
+    <Picker />
   </div>
 </template>
 
@@ -23,13 +20,24 @@ export default defineComponent({
     Picker,
   },
 
-  setup () {
+  setup (props, context) {
     const msg = ref('hello')
+
+    // console.log(props)
+    // console.log(context)
+    // console.log(context.upCallback)
 
     return {
       msg,
     }
   },
+
+  data () {
+    return {
+    }
+  },
+
+  methods: {},
 })
 </script>
 
