@@ -133,6 +133,7 @@ module.exports = {
       chunks: true,
     },
     overlay: true,
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
