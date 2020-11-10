@@ -126,12 +126,10 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     port: 9000,
-    stats: {
-      colors: true,
-      entrypoints: true,
-      depth: true,
-      chunks: true,
-    },
+    // stats: {
+    //   assets: true,
+    //   groupAssetsByEmitStatus: true,
+    // },
     overlay: true,
     historyApiFallback: true,
   },
