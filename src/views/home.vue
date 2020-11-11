@@ -1,19 +1,12 @@
 <template>
   <div>
-    <router-link
-      to="/test"
-      class="my-5 text-lg"
-    >
-      test
-    </router-link>
-
     <Picker />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Picker from '@/components/picker/index.vue'
+import Picker from '@/components/rain-effect/index.vue'
 
 export default defineComponent({
   components: {
@@ -22,10 +15,6 @@ export default defineComponent({
 
   setup (props, context) {
     const msg = ref('hello')
-
-    // console.log(props)
-    // console.log(context)
-    // console.log(context.upCallback)
 
     return {
       msg,

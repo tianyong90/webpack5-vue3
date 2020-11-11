@@ -10,7 +10,10 @@
     "build": "cross-env NODE_ENV=production node scripts/build.js --color"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "element-plus": "^1.0.1-alpha.14",
+    "glslify": "^7.1.1",
+    "gsap": "^3.5.1",
     "lodash": "^4.17.20",
     "tailwindcss": "^1.9.6",
     "three": "^0.122.0",
@@ -33,6 +36,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "cliui": "^7.0.4",
     "copy-webpack-plugin": "^6.3.0",
+    "core-js": "^3.7.0",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
     "eslint": "^7.13.0",

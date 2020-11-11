@@ -1,4 +1,6 @@
 <template>
+  <h1>{{ index }}</h1>
+
   <div
     ref="root"
     class="picker-column"
@@ -45,11 +47,15 @@ export default defineComponent({
     const scrollTop = ref(0)
     const nodePadding = ref(20)
 
+    const index = ref(0)
+
     return {
       rootHeight,
       rowHeight,
       scrollTop,
       nodePadding,
+
+      index,
     }
   },
 
@@ -176,6 +182,8 @@ export default defineComponent({
     },
 
     onClickItem (item) {
+      this.index = item
+
       console.log(item)
     },
   },

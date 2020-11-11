@@ -7,6 +7,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -180,5 +181,13 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin(),
     // 构建前删除 dist 中文件
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public/',
+          to: '',
+        },
+      ],
+    }),
   ],
 }
