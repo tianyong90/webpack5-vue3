@@ -18,6 +18,7 @@ module.exports = {
     // filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  devtool: 'cheap-source-map',
   // cache: {
   //   type: 'filesystem',
   //   store: 'pack',
@@ -126,10 +127,13 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     port: 9000,
-    // stats: {
-    //   assets: true,
-    //   groupAssetsByEmitStatus: true,
-    // },
+    stats: {
+      all: false,
+      entrypoints: true,
+      chunkGroups: true,
+      timings: true,
+      errors: true,
+    },
     overlay: true,
     historyApiFallback: true,
   },
@@ -175,6 +179,6 @@ module.exports = {
     new VueLoaderPlugin(),
     new FriendlyErrorsWebpackPlugin(),
     // TODO:
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
   ],
 }
