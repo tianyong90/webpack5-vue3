@@ -178,7 +178,7 @@ module.exports = {
     new ProgressBarPlugin(),
     new VueLoaderPlugin(),
     new FriendlyErrorsWebpackPlugin(),
-    // TODO:
+    // 构建前删除 dist 中文件
     new CleanWebpackPlugin(),
   ],
 }
