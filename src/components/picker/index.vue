@@ -43,6 +43,18 @@ export default defineComponent({
     const maskHeight = Math.floor(this.visibleItemCount / 2) * this.rowHeight
     this.$el.style.setProperty('--mask-height', `${maskHeight}px`)
   },
+
+  methods: {
+    // TODO
+    getValues (): Array<any> {
+      return []
+    },
+
+    // TODO
+    setValues ([]): void {
+      //
+    },
+  },
 })
 </script>
 

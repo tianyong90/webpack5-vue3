@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Picker from '@/components/rain-effect/index.vue'
+import Picker from '@/components/picker/index.vue'
 
 export default defineComponent({
   components: {

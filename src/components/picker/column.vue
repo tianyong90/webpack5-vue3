@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, toRef } from 'vue'
 
 export default defineComponent({
   props: {
@@ -48,6 +48,8 @@ export default defineComponent({
     const nodePadding = ref(20)
 
     const index = ref(0)
+
+    // const currentItems = toRef()
 
     return {
       rootHeight,
