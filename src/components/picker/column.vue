@@ -198,6 +198,7 @@ export default defineComponent({
   flex-direction: column;
   overflow-y: auto;
   flex: 1;
+  scroll-snap-type: y mandatory;
 
   .picker-option {
     display: inline-flex;
@@ -206,6 +207,7 @@ export default defineComponent({
     align-items: center;
     font-size: 1.25rem;
     font-weight: 400;
+    scroll-snap-align: start;
   }
 }
 </style>
