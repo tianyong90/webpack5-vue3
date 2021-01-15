@@ -74,7 +74,10 @@ export default defineComponent({
     position: absolute;
     width: 100%;
     height: var(--mask-height, 120px);
-    z-index: -1;
+    z-index: 1;
+    user-select: none;
+    /*点击穿透*/
+    pointer-events: none;
   }
 
   &::before {
